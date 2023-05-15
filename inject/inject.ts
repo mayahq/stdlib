@@ -1,7 +1,7 @@
 import { Symbol, TypedInput } from '../deps.ts'
 
 class Inject extends Symbol {
-    schema = {
+    static schema = {
         propertiesSchema: {
             payload: new TypedInput({
                 type: 'str',
@@ -10,18 +10,27 @@ class Inject extends Symbol {
                 label: 'Payload',
             }),
         },
+        editorProperties: {
+            category: 'stdlib',
+            icon: '',
+            color: 'red',
+            paletteLabel: 'inject',
+        },
     }
 
     onInit: Symbol['onInit'] = async (sendMessage) => {
-        this.runtime.dynamicRouter.post(`/inject/${this.id}`, (ctx) => {
+        this.runtime.addHttpRoute('post', `/inject/${this.id}`, async (ctx) => {
             const payload = Inject.schema.propertiesSchema.payload.evaluateField(this, 'payload', {})
-            console.log('Received message:', ctx.request.body())
+            const reqBody = await ctx.request.body().value
+            console.log('Received message:', reqBody)
             const msg = {
                 _id: Date.now().toString(36),
                 payload: payload,
             }
             sendMessage(msg)
+
             ctx.response.status = 200
+            ctx.response.body = {}
         })
     }
 
