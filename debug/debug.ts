@@ -1,6 +1,6 @@
 import { Symbol, TypedInput } from '../deps.ts'
 
-class Inject extends Symbol {
+class Debug extends Symbol {
     static schema = {
         propertiesSchema: {
             payload: new TypedInput({
@@ -26,4 +26,4 @@ class Inject extends Symbol {
     }
 }
 
-export default Inject
+export default Debug
