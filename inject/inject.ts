@@ -20,7 +20,7 @@ class Inject extends Symbol {
 
     onInit: Symbol['onInit'] = async (sendMessage) => {
         this.runtime.addHttpRoute('post', `/inject/${this.id}`, async (ctx) => {
-            const payload = Inject.schema.propertiesSchema.payload.evaluateField(this, 'payload', {})
+            const payload = Inject.schema.propertiesSchema.payload.evaluateField(this, 'payload', {})["value"]
             const reqBody = await ctx.request.body().value
             console.log('Received message:', reqBody)
             const msg = {
