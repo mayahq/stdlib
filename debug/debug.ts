@@ -19,9 +19,11 @@ class Debug extends Symbol {
     }
 
     onMessage: Symbol['onMessage'] = async (_msg, vals, _) => {
+        console.log("🚀 ~ file: debug.ts:22 ~ Debug ~ onMessage:Symbol['onMessage']= ~ vals:", vals)
+        console.log("🚀 ~ file: debug.ts:22 ~ Debug ~ onMessage:Symbol['onMessage']= ~ _msg:", _msg)
         this.runtime.comms.broadcast({
             event: 'debug',
-            data: vals.payload,
+            data: _msg,
         })
     }
 }
