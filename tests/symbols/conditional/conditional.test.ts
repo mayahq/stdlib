@@ -1,5 +1,5 @@
-import { assertEquals, FProgram, FunctionalProgramDsl } from '../../test_deps.ts'
-import { stdpath } from '../../test_deps.ts'
+import { assertEquals, FProgram, FunctionalProgramDsl } from '../../../test_deps.ts'
+import { stdpath } from '../../../test_deps.ts'
 
 const __dirname = stdpath.dirname(new URL(import.meta.url).pathname)
 
