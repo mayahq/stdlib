@@ -1,0 +1,9 @@
+{
+	"moduleName": "stdlib",
+	"repository": "https://github.com/mayahq/stdlib",
+	"symbols": {
+		"debug": "./debug/debug.ts",
+		"function": "./function/function.ts",
+		"inject": "./inject/inject"
+	}
+}
