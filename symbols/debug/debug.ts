@@ -1,11 +1,11 @@
-import { Symbol, TypedInput } from '../deps.ts'
+import { Symbol, TypedInput } from '../../deps.ts'
 
 class Debug extends Symbol {
     static schema = {
         propertiesSchema: {
             payload: new TypedInput({
-                type: 'msg',
-                allowedTypes: ['msg'],
+                type: 'symbol',
+                allowedTypes: ['symbol', 'lambda_input'],
                 defaultValue: 'payload',
                 label: 'Value',
             }),
@@ -18,12 +18,11 @@ class Debug extends Symbol {
         },
     }
 
-    onMessage: Symbol['onMessage'] = async (_msg, vals, _) => {
-        console.log("🚀 ~ file: debug.ts:22 ~ Debug ~ onMessage:Symbol['onMessage']= ~ vals:", vals)
-        console.log("🚀 ~ file: debug.ts:22 ~ Debug ~ onMessage:Symbol['onMessage']= ~ _msg:", _msg)
+    call: Symbol['call'] = async (runner, args) => {
+        const result = await runner.evaluateProperty('payload', args)
         this.runtime.comms.broadcast({
             event: 'debug',
-            data: _msg,
+            data: result,
         })
     }
 }

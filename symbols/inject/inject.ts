@@ -1,13 +1,20 @@
-import { Symbol, TypedInput } from '../deps.ts'
+import { Symbol, TypedInput } from '../../deps.ts'
 
 class Inject extends Symbol {
+    static description = 'Inject procedure to trigger flows remotely and from the editor.'
+    static isConfig = false
+    static type = 'inject'
+
     static schema = {
         propertiesSchema: {
+            trigger: new TypedInput({
+                type: 'symbol',
+                allowedTypes: ['symbol'],
+                label: 'Trigger',
+            }),
             payload: new TypedInput({
-                type: 'str',
-                allowedTypes: ['bool', 'json', 'num', 'bin'],
-                defaultValue: 'bruh',
-                label: 'Payload',
+                type: 'json',
+                allowedTypes: ['json', 'string', 'number', 'boolean'],
             }),
         },
         editorProperties: {
@@ -18,23 +25,27 @@ class Inject extends Symbol {
         },
     }
 
-    onInit: Symbol['onInit'] = async (sendMessage) => {
+    onInit: Symbol['init'] = async (runner) => {
         this.runtime.addHttpRoute('post', `/inject/${this.id}`, async (ctx) => {
-            const payload = Inject.schema.propertiesSchema.payload.evaluateField(this, 'payload', {})["value"]
+            const payload = runner.evaluateProperty('payload')
             const reqBody = await ctx.request.body().value
             console.log('Received message:', reqBody)
             const msg = {
                 _id: Date.now().toString(36),
                 payload: payload,
             }
-            sendMessage(msg)
+            const response = await runner.evaluateProperty('trigger', {
+                ...msg,
+            })
 
             ctx.response.status = 200
-            ctx.response.body = {}
+            ctx.response.body = {
+                data: response,
+            }
         })
     }
 
-    onMessage: Symbol['onMessage'] = async () => {
+    onMessage: Symbol['call'] = async () => {
         return
     }
 }
