@@ -25,7 +25,7 @@ class Inject extends Symbol {
         },
     }
 
-    onInit: Symbol['init'] = async (runner) => {
+    init: Symbol['init'] = async (runner) => {
         this.runtime.addHttpRoute('post', `/inject/${this.id}`, async (ctx) => {
             const payload = runner.evaluateProperty('payload')
             const reqBody = await ctx.request.body().value
