@@ -25,6 +25,7 @@ export const startRuntimeWithProgram = async (flow: FunctionalProgramDsl, showLo
     }
     return async () => {
         await output.kill()
+        Deno.removeSync(stdpath.join(__dirname, 'temp', 'abcxyz.json'))
         // Give the OS some time to close the socket
         await new Promise((resolve) => setTimeout(resolve, 1000))
     }
