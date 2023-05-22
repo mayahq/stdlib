@@ -3,8 +3,9 @@ import { getManifestPath } from '../../../utils/basePath.ts'
 
 const basePath = getManifestPath()
 const functionPath = `File://${stdpath.join(basePath, 'symbols/function/function.ts')}`
+const conditionalPath = `File://${stdpath.join(basePath, 'symbols/conditional/conditional.ts')}`
 
-export const simpleFunctionDsl: FunctionalProgramDsl = {
+export const conditionalTestDsl: FunctionalProgramDsl = {
     'symbols': [
         {
             'id': 'f1',
@@ -34,77 +35,7 @@ export const simpleFunctionDsl: FunctionalProgramDsl = {
             'inputs': {
                 'body': {
                     'type': 'string',
-                    'value': 'return { output: input * 2 }',
-                },
-                'input': {
-                    'type': 'symbol',
-                    'symbolId': 'f1',
-                    'value': 'output',
-                },
-            },
-            'outputs': {},
-            'children': {
-                'in': [[]],
-                'out': [],
-                'symbols': [],
-            },
-        },
-        {
-            'id': 'f3',
-            'label': 'f3',
-            'type': functionPath,
-            'inputs': {
-                'body': {
-                    'type': 'string',
-                    'value': 'return { output: input * 2 }',
-                },
-                'input': {
-                    'type': 'symbol',
-                    'symbolId': 'f2',
-                    'value': 'output',
-                },
-            },
-            'outputs': {},
-            'children': {
-                'in': [[]],
-                'out': [],
-                'symbols': [],
-            },
-        },
-    ],
-}
-
-export const dynamicFunctionDsl: FunctionalProgramDsl = {
-    'symbols': [
-        {
-            'id': 'f1',
-            'label': 'f1',
-            'type': functionPath,
-            'inputs': {
-                'body': {
-                    'type': 'string',
-                    'value': 'return { output: 1, function: `return { output: input * 3 }` };',
-                },
-                'input': {
-                    'type': 'string',
-                    'value': 'bruh',
-                },
-            },
-            'outputs': {},
-            'children': {
-                'in': [[]],
-                'out': [],
-                'symbols': [],
-            },
-        },
-        {
-            'id': 'f2',
-            'label': 'f2',
-            'type': functionPath,
-            'inputs': {
-                'body': {
-                    'type': 'string',
-                    'value': 'return { output: 2 }',
+                    'value': 'return { output: 2 };',
                 },
                 'input': {
                     'type': 'string',
@@ -124,14 +55,40 @@ export const dynamicFunctionDsl: FunctionalProgramDsl = {
             'type': functionPath,
             'inputs': {
                 'body': {
-                    'type': 'symbol',
-                    'symbolId': 'f1',
-                    'value': 'function',
+                    'type': 'string',
+                    'value': 'return { value: true };',
                 },
                 'input': {
+                    'type': 'string',
+                    'value': 'bruh',
+                },
+            },
+            'outputs': {},
+            'children': {
+                'in': [[]],
+                'out': [],
+                'symbols': [],
+            },
+        },
+        {
+            'id': 'if_1',
+            'label': 'if_1',
+            'type': conditionalPath,
+            'inputs': {
+                'ifTrue': {
+                    'type': 'symbol',
+                    'symbolId': 'f1',
+                    'value': 'output',
+                },
+                'ifFalse': {
                     'type': 'symbol',
                     'symbolId': 'f2',
                     'value': 'output',
+                },
+                'condition': {
+                    'type': 'symbol',
+                    'symbolId': 'f3',
+                    'value': 'value',
                 },
             },
             'outputs': {},

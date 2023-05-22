@@ -2,7 +2,7 @@ import { FunctionalProgramDsl, stdpath } from '../../../test_deps.ts'
 import { getManifestPath } from '../../../utils/basePath.ts'
 
 const basePath = getManifestPath()
-const httpPath = stdpath.join(basePath, 'symbols/http_request/http_request.ts')
+const httpPath = `File://${stdpath.join(basePath, 'symbols/http_request/http_request.ts')}`
 
 export const simpleHttpDsl: FunctionalProgramDsl = {
     'symbols': [

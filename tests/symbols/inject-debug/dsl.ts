@@ -2,8 +2,8 @@ import { FunctionalProgramDsl, stdpath } from '../../../test_deps.ts'
 import { getManifestPath } from '../../../utils/basePath.ts'
 
 const basePath = getManifestPath()
-const injectPath = stdpath.join(basePath, 'symbols/inject/inject.ts')
-const debugPath = stdpath.join(basePath, 'symbols/debug/debug.ts')
+const injectPath = `File://${stdpath.join(basePath, 'symbols/inject/inject.ts')}`
+const debugPath = `File://${stdpath.join(basePath, 'symbols/debug/debug.ts')}`
 
 export const simpleInjectDebugDsl: FunctionalProgramDsl = {
     'symbols': [
