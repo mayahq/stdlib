@@ -22,6 +22,8 @@ export function getManifestPath() {
 
         if (exists) {
             return stdpath.join(stdpath.resolve(manifestPath))
+        } else {
+            manifestPath = stdpath.join(manifestPath, '..')
         }
     }
 

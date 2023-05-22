@@ -7,7 +7,7 @@ type DebugEvent = {
     data: any
 }
 
-Deno.test('Inject and debug', async (t) => {
+Deno.test('Inject and debug', async () => {
     const kill = await startRuntimeWithProgram(simpleInjectDebugDsl)
     const request = {
         method: 'post',
