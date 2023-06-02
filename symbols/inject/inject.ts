@@ -7,11 +7,6 @@ class Inject extends Symbol {
 
     static schema = {
         propertiesSchema: {
-            trigger: new TypedInput({
-                type: 'symbol',
-                allowedTypes: ['symbol'],
-                label: 'Trigger',
-            }),
             payload: new TypedInput({
                 type: 'json',
                 allowedTypes: ['json', 'string', 'number', 'boolean'],
@@ -25,7 +20,7 @@ class Inject extends Symbol {
         },
     }
 
-    init: Symbol['init'] = async (runner) => {
+    init: Symbol['init'] = async (runner, callback) => {
         this.runtime.addHttpRoute('post', `/inject/${this.id}`, async (ctx) => {
             const payload = runner.evaluateProperty('payload')
             const reqBody = await ctx.request.body().value
@@ -34,14 +29,9 @@ class Inject extends Symbol {
                 _id: Date.now().toString(36),
                 payload: payload,
             }
-            const response = await runner.evaluateProperty('trigger', {
-                ...msg,
-            })
+            callback(msg)
 
             ctx.response.status = 200
-            ctx.response.body = {
-                data: response,
-            }
         })
     }
 

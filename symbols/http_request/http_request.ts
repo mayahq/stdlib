@@ -42,13 +42,8 @@ class HttpRequest extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (runner, args) => {
-        const [httpVerb, url, headers, body] = await Promise.all([
-            runner.evaluateProperty('httpVerb', args),
-            runner.evaluateProperty('url', args),
-            runner.evaluateProperty('headers', args),
-            runner.evaluateProperty('body', args),
-        ])
+    call: Symbol['call'] = async (vals, callback, _pulse) => {
+        const { httpVerb, url, headers, body } = vals
 
         const request = {
             url: url,
@@ -58,10 +53,10 @@ class HttpRequest extends Symbol {
         }
 
         const response = await axios(request)
-        return {
+        callback({
             data: response.data,
             status: response.status,
-        }
+        })
     }
 }
 

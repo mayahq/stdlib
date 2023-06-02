@@ -18,12 +18,14 @@ class Debug extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (runner, args) => {
-        const result = await runner.evaluateProperty('payload', args)
+    call: Symbol['call'] = async (vals, callback, pulse) => {
+        const result = vals.payload
         this.runtime.comms.broadcast({
             event: 'debug',
             data: result,
         })
+
+        return callback(pulse)
     }
 }
 

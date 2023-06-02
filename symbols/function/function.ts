@@ -8,8 +8,8 @@ class DynamicFunction extends Symbol {
                 allowedTypes: ['symbol', 'string'],
             }),
             input: new TypedInput({
-                type: 'symbol',
-                allowedTypes: ['symbol', 'string', 'number', 'boolean', 'json'],
+                type: 'pulse',
+                allowedTypes: ['symbol', 'pulse', 'json'],
             }),
         },
         editorProperties: {
@@ -20,9 +20,9 @@ class DynamicFunction extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (runner) => {
-        const body = await runner.evaluateProperty('body')
-        const input = await runner.evaluateProperty('input')
+    call: Symbol['call'] = async (vals, callback, pulse) => {
+        const body = vals.body
+        const input = vals.input || 'none'
         const code = `
         (function({ input }) {
             ${body}
@@ -30,8 +30,8 @@ class DynamicFunction extends Symbol {
         `
         // console.log('running with input', input)
         const fn = eval(code)
-        const result = fn({ input })
-        return result
+        const result = await fn({ input, vals, pulse })
+        return callback(result)
     }
 }
 
