@@ -1,4 +1,6 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
+
+const PULSE = 'pulse' as 'pulse' | 'eval'
 
 class Conditional extends Symbol {
     static type = 'if-else'
@@ -6,27 +8,23 @@ class Conditional extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            ifTrue: new TypedInput({
-                type: 'symbol',
-                allowedTypes: ['symbol'],
-                defaultValue: 'get',
-                label: 'If true',
-            }),
-            ifFalse: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol'],
-                defaultValue: '',
-                label: 'Else',
-            }),
-            condition: new TypedInput({
-                type: 'symbol',
-                allowedTypes: ['boolean', 'symbol'],
-                defaultValue: '{}',
-                label: 'Headers',
-            }),
+        inputSchema: {
+            condition: {
+                allowedTypes: ['pulse', 'boolean'] as TypedInputTypes[],
+                description: 'Boolean value based on which the procedure will choose one of the branches to execute.',
+            },
+        },
+        outputSchema: {
+            ifTrue: {
+                type: PULSE,
+                description: 'This pulse port will fire if the condition is true.',
+                displayName: 'If true',
+            },
+            ifFalse: {
+                type: PULSE,
+                description: 'This pulse port will fire if the condition is false.',
+                displayName: 'If false',
+            },
         },
         editorProperties: {
             category: 'stdlib',
@@ -36,12 +34,11 @@ class Conditional extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (runner, args) => {
-        const condition = await runner.evaluateProperty('condition', args)
-        if (condition && condition !== 0) {
-            return await runner.evaluateProperty('ifTrue')
+    call: Symbol['call'] = async (vals, callback, pulse) => {
+        if (vals.condition) {
+            callback(pulse, 'ifTrue')
         } else {
-            return await runner.evaluateProperty('ifFalse')
+            callback(pulse, 'ifFalse')
         }
     }
 }
