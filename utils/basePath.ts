@@ -32,7 +32,7 @@ export function getManifestPath() {
 
 export function getManifest(): Manifest {
     const manifestPath = getManifestPath()
-    return JSON.parse(Deno.readTextFileSync(manifestPath))
+    return JSON.parse(Deno.readTextFileSync(stdpath.join(manifestPath, 'manifest.json')))
 }
 
 export function updateManifest(manifest: Manifest) {

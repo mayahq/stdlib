@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class Comparison extends Symbol {
     static type = 'comparison'
@@ -6,28 +6,29 @@ class Comparison extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            val1: new TypedInput({
-                type: 'number',
-                allowedTypes: ['symbol', 'number', 'string'],
-                defaultValue: 0,
-                label: 'Value 1',
-            }),
-            val2: new TypedInput({
-                type: 'number',
-                allowedTypes: ['symbol', 'number', 'string'],
-                defaultValue: 0,
-                label: 'Value 2',
-            }),
-            operation: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: '===',
-                label: 'Operation',
-                // choices: ['==', '!=', '<', '<=', '>', '>='],
-            }),
+        inputSchema: {
+            operation: {
+                allowedTypes: ['pulse', 'procedure', 'string'] as TypedInputTypes[],
+                description: 'The comparison operation to perform.',
+                displayName: 'Operation',
+                choices: ['==', '!=', '<', '<=', '>', '>='],
+            },
+            val1: {
+                allowedTypes: ['eval', 'pulse', 'number', 'string'] as TypedInputTypes[],
+                description: 'First operand for comparison.',
+                displayName: 'Value 1',
+            },
+            val2: {
+                allowedTypes: ['eval', 'pulse', 'number', 'string'] as TypedInputTypes[],
+                description: 'First operand for comparison.',
+                displayName: 'Value 2',
+            },
+        },
+        outputSchema: {
+            result: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The result of the comparison (true or false)',
+            },
         },
         editorProperties: {
             category: 'stdlib',

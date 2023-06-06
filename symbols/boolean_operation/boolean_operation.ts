@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInput, TypedInputTypes } from '../../deps.ts'
 
 class BooleanOperation extends Symbol {
     static type = 'boolean-operation'
@@ -6,28 +6,29 @@ class BooleanOperation extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            val1: new TypedInput({
-                type: 'boolean',
-                allowedTypes: ['symbol', 'boolean'],
-                defaultValue: false,
-                label: 'Value 1',
-            }),
-            val2: new TypedInput({
-                type: 'boolean',
-                allowedTypes: ['symbol', 'boolean'],
-                defaultValue: false,
-                label: 'Value 2',
-            }),
-            operation: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: 'and',
-                label: 'Operation',
-                // choices: ['and', 'or', 'not'],
-            }),
+        inputSchema: {
+            operation: {
+                allowedTypes: ['pulse', 'procedure', 'string'] as TypedInputTypes[],
+                description: 'The boolean operation to perform.',
+                displayName: 'Operation',
+                choices: ['and', 'or', 'not'],
+            },
+            val1: {
+                allowedTypes: ['eval', 'pulse', 'boolean'] as TypedInputTypes[],
+                description: 'First operand for comparison.',
+                displayName: 'Value 1',
+            },
+            val2: {
+                allowedTypes: ['eval', 'pulse', 'boolean'] as TypedInputTypes[],
+                description: 'First operand for comparison.',
+                displayName: 'Value 2',
+            },
+        },
+        outputSchema: {
+            result: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The result of the comparison (true or false)',
+            },
         },
         editorProperties: {
             category: 'stdlib',

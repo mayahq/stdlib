@@ -1,14 +1,20 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class Debug extends Symbol {
     static schema = {
-        propertiesSchema: {
-            payload: new TypedInput({
-                type: 'symbol',
-                allowedTypes: ['symbol', 'lambda_input'],
-                defaultValue: 'payload',
-                label: 'Value',
-            }),
+        inputSchema: {
+            value: {
+                allowedTypes: ['procedure', 'pulse'] as TypedInputTypes[],
+                description: 'The constant value to log at the client.',
+                displayName: 'Value',
+            },
+        },
+        outputSchema: {
+            value: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The same value sent forward.',
+                displayName: '',
+            },
         },
         editorProperties: {
             category: 'stdlib',

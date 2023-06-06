@@ -1,16 +1,26 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class DynamicFunction extends Symbol {
     static schema = {
-        propertiesSchema: {
-            body: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-            }),
-            input: new TypedInput({
-                type: 'pulse',
-                allowedTypes: ['symbol', 'pulse', 'json'],
-            }),
+        inputSchema: {
+            body: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'The javascript code to execute, as a string.',
+                displayName: 'Code',
+            },
+            input: {
+                allowedTypes: ['procedure', 'pulse', 'string', 'number', 'boolean', 'json'] as TypedInputTypes[],
+                description:
+                    'The external input to provide the function, available as the variable `input` inside the code.',
+                displayName: 'Input',
+            },
+        },
+        outputSchema: {
+            result: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The value that the code returns.',
+                displayName: 'Result',
+            },
         },
         editorProperties: {
             category: 'stdlib',
@@ -31,7 +41,7 @@ class DynamicFunction extends Symbol {
         // console.log('running with input', input)
         const fn = eval(code)
         const result = await fn({ input, vals, pulse })
-        return callback(result)
+        return callback({ result })
     }
 }
 

@@ -1,4 +1,4 @@
-import { axios, Symbol, TypedInput } from '../../deps.ts'
+import { axios, Symbol, TypedInputTypes } from '../../deps.ts'
 
 class HttpRequest extends Symbol {
     static type = 'http-request'
@@ -6,33 +6,40 @@ class HttpRequest extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            httpVerb: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: 'get',
-                label: 'HTTP Verb',
-            }),
-            url: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: '',
-                label: 'URL',
-            }),
-            headers: new TypedInput({
-                type: 'json',
-                allowedTypes: ['json', 'symbol'],
-                defaultValue: '{}',
-                label: 'Headers',
-            }),
-            body: new TypedInput({
-                type: 'json',
-                allowedTypes: ['json', 'symbol'],
-                defaultValue: '{}',
-                label: 'Body',
-            }),
+        inputSchema: {
+            httpVerb: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'The HTTP verb (GET, POST, etc.)',
+                choices: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+                displayName: 'Method',
+            },
+            url: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'The request URL',
+                displayName: 'URL',
+            },
+            headers: {
+                allowedTypes: ['procedure', 'pulse', 'json'] as TypedInputTypes[],
+                description: 'The request headers (as a JSON object).',
+                displayName: 'Headers',
+            },
+            body: {
+                allowedTypes: ['procedure', 'pulse', 'string', 'number', 'boolean', 'json'] as TypedInputTypes[],
+                description: 'The request body.',
+                displayName: 'Body',
+            },
+        },
+        outputSchema: {
+            data: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The response body.',
+                displayName: 'Response body',
+            },
+            status: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The response status.',
+                displayName: 'Response status',
+            },
         },
         editorProperties: {
             category: 'stdlib',

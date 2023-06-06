@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class ReadFile extends Symbol {
     static type = 'read-file'
@@ -7,22 +7,24 @@ class ReadFile extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            filePath: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: '',
-                label: 'File Path',
-            }),
-            outputType: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: 'string',
-                label: 'Output Type',
-                // choices: ['string', 'buffer'],
-            }),
+        inputSchema: {
+            filePath: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'The path of the file to read from.',
+                displayName: 'File path',
+            },
+            outputType: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'The format of the output.',
+                displayName: 'Output format',
+            },
+        },
+        outputSchema: {
+            fileContent: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The contents of the file read, in the specified format.',
+                displayName: 'File content',
+            },
         },
         editorProperties: {
             category: 'stdlib',

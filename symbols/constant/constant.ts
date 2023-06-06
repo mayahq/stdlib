@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class Constant extends Symbol {
     static type = 'constant'
@@ -6,15 +6,19 @@ class Constant extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            value: new TypedInput({
-                type: 'string',
-                allowedTypes: ['string', 'number', 'boolean', 'json'],
-                defaultValue: '',
-                label: 'Value',
-            }),
+        inputSchema: {
+            value: {
+                allowedTypes: ['string', 'number', 'boolean', 'json'] as TypedInputTypes[],
+                description: 'The constant value to send forward.',
+                displayName: 'Value',
+            },
+        },
+        outputSchema: {
+            value: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The constant value sent forward.',
+                displayName: '',
+            },
         },
         editorProperties: {
             category: 'stdlib',
@@ -26,7 +30,7 @@ class Constant extends Symbol {
 
     call: Symbol['call'] = async (vals, callback, _pulse) => {
         const { value } = vals
-        callback({ value: value })
+        callback({ value })
     }
 }
 

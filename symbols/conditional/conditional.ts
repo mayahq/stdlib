@@ -9,9 +9,10 @@ class Conditional extends Symbol {
 
     static schema = {
         inputSchema: {
-            condition: {
-                allowedTypes: ['pulse', 'boolean'] as TypedInputTypes[],
-                description: 'Boolean value based on which the procedure will choose one of the branches to execute.',
+            value: {
+                allowedTypes: ['string', 'number', 'boolean', 'json'] as TypedInputTypes[],
+                description: 'The constant value to send forward.',
+                displayName: 'Value',
             },
         },
         outputSchema: {

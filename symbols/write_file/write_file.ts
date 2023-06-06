@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class WriteFile extends Symbol {
     static type = 'write-file'
@@ -6,21 +6,24 @@ class WriteFile extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            filePath: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: '',
-                label: 'File Path',
-            }),
-            fileContent: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: '',
-                label: 'File Content',
-            }),
+        inputSchema: {
+            filePath: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'Path of the file to write to.',
+                displayName: 'File path',
+            },
+            fileContent: {
+                allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
+                description: 'Content to write to the file (string or buffer).',
+                displayName: 'Content',
+            },
+        },
+        outputSchema: {
+            success: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'True if write was successful, false otherwise.',
+                displayName: 'Success?',
+            },
         },
         editorProperties: {
             category: 'stdlib',

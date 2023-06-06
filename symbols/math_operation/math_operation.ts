@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class MathOperation extends Symbol {
     static type = 'math-operation'
@@ -6,28 +6,29 @@ class MathOperation extends Symbol {
     static isConfig = false
 
     static schema = {
-        inputSchema: {},
-        outputSchema: {},
-        propertiesSchema: {
-            num1: new TypedInput({
-                type: 'number',
-                allowedTypes: ['symbol', 'number'],
-                defaultValue: 0,
-                label: 'Number 1',
-            }),
-            num2: new TypedInput({
-                type: 'number',
-                allowedTypes: ['symbol', 'number'],
-                defaultValue: 0,
-                label: 'Number 2',
-            }),
-            operation: new TypedInput({
-                type: 'string',
-                allowedTypes: ['symbol', 'string'],
-                defaultValue: 'add',
-                label: 'Operation',
-                // choices: ['add', 'subtract', 'multiply', 'divide', 'modulo', 'exponentiate'],
-            }),
+        inputSchema: {
+            operation: {
+                allowedTypes: ['pulse', 'procedure', 'string'] as TypedInputTypes[],
+                description: 'The arithmetic operation to perform.',
+                displayName: 'Operation',
+                choices: ['add', 'subtract', 'multiply', 'divide', 'modulo', 'exponentiate'],
+            },
+            num1: {
+                allowedTypes: ['eval', 'pulse', 'number', 'string'] as TypedInputTypes[],
+                description: 'First number for operation.',
+                displayName: 'Value 1',
+            },
+            num2: {
+                allowedTypes: ['eval', 'pulse', 'number', 'string'] as TypedInputTypes[],
+                description: 'Second number for operation.',
+                displayName: 'Value 2',
+            },
+        },
+        outputSchema: {
+            result: {
+                type: 'eval' as 'pulse' | 'eval',
+                description: 'The result of the operation (true or false)',
+            },
         },
         editorProperties: {
             category: 'stdlib',

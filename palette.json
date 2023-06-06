@@ -1,0 +1,448 @@
+[
+    {
+        "type": "gh:mayahq/stdlib/read_file",
+        "paletteLabel": "read-file",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "filePath",
+                "displayName": "File path",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "outputType",
+                "displayName": "Output format",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "fileContent",
+                "displayName": "File content",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/conditional",
+        "paletteLabel": "conditional",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "value",
+                "displayName": "Value",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "ifTrue",
+                "displayName": "If true",
+                "type": "pulse",
+                "linkType": "pulse"
+            },
+            {
+                "name": "ifFalse",
+                "displayName": "If false",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/inject",
+        "paletteLabel": "inject",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "payload",
+                "displayName": "Value",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/boolean_operation",
+        "paletteLabel": "boolean-operation",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "operation",
+                "displayName": "Operation",
+                "choices": [
+                    "and",
+                    "or",
+                    "not"
+                ],
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "val1",
+                "displayName": "Value 1",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "val2",
+                "displayName": "Value 2",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "result",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/http_in",
+        "paletteLabel": "http-request",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/function",
+        "paletteLabel": "function",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "body",
+                "displayName": "Code",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "input",
+                "displayName": "Input",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "result",
+                "displayName": "Result",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/constant",
+        "paletteLabel": "constant",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "value",
+                "displayName": "Value",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "value",
+                "displayName": "",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/comparison",
+        "paletteLabel": "comparison",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "operation",
+                "displayName": "Operation",
+                "choices": [
+                    "==",
+                    "!=",
+                    "<",
+                    "<=",
+                    ">",
+                    ">="
+                ],
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "val1",
+                "displayName": "Value 1",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "val2",
+                "displayName": "Value 2",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "result",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/http_request",
+        "paletteLabel": "http-request",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "httpVerb",
+                "displayName": "Method",
+                "choices": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "DELETE",
+                    "PATCH",
+                    "OPTIONS"
+                ],
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "url",
+                "displayName": "URL",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "headers",
+                "displayName": "Headers",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "body",
+                "displayName": "Body",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "data",
+                "displayName": "Response body",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "status",
+                "displayName": "Response status",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/write_file",
+        "paletteLabel": "write-file",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "filePath",
+                "displayName": "File path",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "fileContent",
+                "displayName": "Content",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "success",
+                "displayName": "Success?",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/math_operation",
+        "paletteLabel": "math-operation",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "operation",
+                "displayName": "Operation",
+                "choices": [
+                    "add",
+                    "subtract",
+                    "multiply",
+                    "divide",
+                    "modulo",
+                    "exponentiate"
+                ],
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "num1",
+                "displayName": "Value 1",
+                "allowLink": true,
+                "type": "string"
+            },
+            {
+                "name": "num2",
+                "displayName": "Value 2",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "result",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
+        "type": "gh:mayahq/stdlib/debug",
+        "paletteLabel": "debug",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "value",
+                "displayName": "Value",
+                "allowLink": true,
+                "type": "string"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "value",
+                "displayName": "",
+                "type": "eval",
+                "linkType": "eval"
+            },
+            {
+                "name": "pulse",
+                "displayName": "Pulse out",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    }
+]

@@ -1,9 +1,9 @@
-import { axios, FunctionalProgramDsl, stdpath } from '../../test_deps.ts'
+import { axios, ProgramDsl, stdpath } from '../../test_deps.ts'
 
 const __dirname = stdpath.dirname(new URL(import.meta.url).pathname)
 const runtimePathName = stdpath.join(__dirname, 'runtime.ts')
 
-export const startRuntimeWithProgram = async (flow: FunctionalProgramDsl, showLogs = false) => {
+export const startRuntimeWithProgram = async (flow: ProgramDsl, showLogs = false) => {
     const command = new Deno.Command('deno', {
         args: ['run', '--allow-all', runtimePathName],
         stdout: showLogs ? undefined : 'null',

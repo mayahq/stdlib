@@ -1,4 +1,4 @@
-import { Symbol, TypedInput } from '../../deps.ts'
+import { Symbol, TypedInputTypes } from '../../deps.ts'
 
 class Inject extends Symbol {
     static description = 'Inject procedure to trigger flows remotely and from the editor.'
@@ -6,12 +6,14 @@ class Inject extends Symbol {
     static type = 'inject'
 
     static schema = {
-        propertiesSchema: {
-            payload: new TypedInput({
-                type: 'json',
-                allowedTypes: ['json', 'string', 'number', 'boolean'],
-            }),
+        inputSchema: {
+            payload: {
+                allowedTypes: ['string', 'number', 'boolean', 'json'] as TypedInputTypes[],
+                description: 'The constant value to send forward.',
+                displayName: 'Value',
+            },
         },
+        outputSchema: {},
         editorProperties: {
             category: 'stdlib',
             icon: '',
@@ -20,16 +22,16 @@ class Inject extends Symbol {
         },
     }
 
-    init: Symbol['init'] = async (runner, callback) => {
+    init: Symbol['init'] = async (runnable, send, _pulse) => {
         this.runtime.addHttpRoute('post', `/inject/${this.id}`, async (ctx) => {
-            const payload = runner.evaluateProperty('payload')
+            const payload = runnable.evaluateProperty('payload')
             const reqBody = await ctx.request.body().value
             console.log('Received message:', reqBody)
             const msg = {
                 _id: Date.now().toString(36),
                 payload: payload,
             }
-            callback(msg)
+            send(msg)
 
             ctx.response.status = 200
         })
