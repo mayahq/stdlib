@@ -25,7 +25,7 @@ class Debug extends Symbol {
     }
 
     call: Symbol['call'] = async (vals, callback, pulse) => {
-        const result = vals.payload
+        const result = vals.value
         this.runtime.comms.broadcast({
             event: 'debug',
             data: result,
