@@ -69,7 +69,7 @@ class MathOperation extends Symbol {
                 throw new Error('Invalid operation.')
         }
 
-        callback({ result })
+        callback({ mathResult: result })
     }
 }
 
