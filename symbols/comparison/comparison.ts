@@ -71,7 +71,7 @@ class Comparison extends Symbol {
                 throw new Error('Invalid operation.')
         }
 
-        callback({ result })
+        callback({ compareResult: result })
     }
 }
 
