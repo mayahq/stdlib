@@ -6,6 +6,24 @@ const basePath = getManifestPath()
 const manifest = getManifest()
 const symbolsPath = stdpath.join(basePath, 'symbols')
 
+const zeroValues: Record<string, any> = {
+    string: '',
+    number: 0,
+    boolean: false,
+    json: {},
+}
+
+function getFirstPrimitive(allowedTypes: string[]) {
+    const primitives: Record<string, boolean> = { string: true, number: true, boolean: true, json: true }
+    for (const aType of allowedTypes) {
+        if (primitives[aType]) {
+            return aType
+        }
+    }
+
+    return 'string'
+}
+
 function getProcedureDefFromClass(procClass: any, dirname: string) {
     console.log(procClass.schema.editorProperties)
     const inputSchema = procClass.schema.inputSchema
@@ -14,12 +32,19 @@ function getProcedureDefFromClass(procClass: any, dirname: string) {
     ]
     Object.keys(inputSchema).forEach((inputName) => {
         const input = inputSchema[inputName]
+
+        const defaultType = input.defaultType || getFirstPrimitive(input.allowedTypes)
+        const defaultValue = input.defualtValue || zeroValues[defaultType]
+
         inputs.push({
             name: inputName,
             displayName: input.displayName,
             choices: input.choices,
             allowLink: input.allowLink === undefined ? true : input.allowLink,
-            type: 'string',
+            // type: 'string',
+            allowedTypes: input.allowedTypes,
+            defaultType: defaultType,
+            defaultValue: defaultValue,
         })
     })
 

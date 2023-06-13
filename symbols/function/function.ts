@@ -41,6 +41,8 @@ class DynamicFunction extends Symbol {
         // console.log('running with input', input)
         const fn = eval(code)
         const result = await fn({ input, vals, pulse })
+
+        // console.log('result', result)
         return callback({ result })
     }
 }
