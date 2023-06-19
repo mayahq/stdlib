@@ -24,7 +24,7 @@ class Debug extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (vals, callback, pulse) => {
+    call: Symbol['call'] = async (_, vals, callback, pulse) => {
         const result = {
             value: vals.value,
             timestamp: Date.now(),

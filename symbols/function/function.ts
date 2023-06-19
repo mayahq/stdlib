@@ -7,6 +7,10 @@ class DynamicFunction extends Symbol {
                 allowedTypes: ['procedure', 'pulse', 'string'] as TypedInputTypes[],
                 description: 'The javascript code to execute, as a string.',
                 displayName: 'Code',
+                editorProperties: {
+                    type: 'code',
+                    language: 'javascript',
+                },
             },
             input: {
                 allowedTypes: ['procedure', 'pulse', 'string', 'number', 'boolean', 'json'] as TypedInputTypes[],
@@ -30,7 +34,7 @@ class DynamicFunction extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (vals, callback, pulse) => {
+    call: Symbol['call'] = async (_, vals, callback, pulse) => {
         const body = vals.body
         const input = vals.input || 'none'
         const code = `

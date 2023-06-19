@@ -37,7 +37,7 @@ class Loop extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (vals, callback, pulse) => {
+    call: Symbol['call'] = async (_, vals, callback, pulse) => {
         if (!vals.condition) {
             callback(pulse, 'continue')
         } else {

@@ -38,7 +38,7 @@ class BooleanOperation extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (vals, callback, _pulse) => {
+    call: Symbol['call'] = async (_ctx, vals, callback, _pulse) => {
         const { val1, val2, operation } = vals
 
         let result

@@ -17,7 +17,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The path of the file to read from."
             },
             {
                 "name": "outputType",
@@ -29,7 +30,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The format of the output."
             }
         ],
         "outputs": [
@@ -66,7 +68,8 @@
                     "json"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The constant value to send forward."
             }
         ],
         "outputs": [
@@ -103,7 +106,8 @@
                     "json"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The constant value to send forward."
             }
         ],
         "outputs": [
@@ -138,7 +142,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The boolean operation to perform."
             },
             {
                 "name": "val1",
@@ -150,7 +155,8 @@
                     "boolean"
                 ],
                 "defaultType": "boolean",
-                "defaultValue": false
+                "defaultValue": false,
+                "description": "First operand for comparison."
             },
             {
                 "name": "val2",
@@ -162,7 +168,8 @@
                     "boolean"
                 ],
                 "defaultType": "boolean",
-                "defaultValue": false
+                "defaultValue": false,
+                "description": "First operand for comparison."
             }
         ],
         "outputs": [
@@ -215,7 +222,12 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "editorProperties": {
+                    "type": "code",
+                    "language": "javascript"
+                },
+                "description": "The javascript code to execute, as a string."
             },
             {
                 "name": "input",
@@ -230,7 +242,8 @@
                     "json"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The external input to provide the function, available as the variable `input` inside the code."
             }
         ],
         "outputs": [
@@ -267,7 +280,8 @@
                     "json"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The constant value to send forward."
             }
         ],
         "outputs": [
@@ -311,7 +325,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The comparison operation to perform."
             },
             {
                 "name": "val1",
@@ -324,7 +339,8 @@
                     "string"
                 ],
                 "defaultType": "number",
-                "defaultValue": 0
+                "defaultValue": 0,
+                "description": "First operand for comparison."
             },
             {
                 "name": "val2",
@@ -337,7 +353,8 @@
                     "string"
                 ],
                 "defaultType": "number",
-                "defaultValue": 0
+                "defaultValue": 0,
+                "description": "First operand for comparison."
             }
         ],
         "outputs": [
@@ -380,7 +397,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The HTTP verb (GET, POST, etc.)"
             },
             {
                 "name": "url",
@@ -392,7 +410,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The request URL"
             },
             {
                 "name": "headers",
@@ -404,7 +423,8 @@
                     "json"
                 ],
                 "defaultType": "json",
-                "defaultValue": {}
+                "defaultValue": {},
+                "description": "The request headers (as a JSON object)."
             },
             {
                 "name": "body",
@@ -419,7 +439,8 @@
                     "json"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The request body."
             }
         ],
         "outputs": [
@@ -461,7 +482,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "Path of the file to write to."
             },
             {
                 "name": "fileContent",
@@ -473,7 +495,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "Content to write to the file (string or buffer)."
             }
         ],
         "outputs": [
@@ -508,7 +531,8 @@
                     "procedure",
                     "pulse"
                 ],
-                "defaultType": "pulse"
+                "defaultType": "pulse",
+                "description": "The condition to choose which output to send the pulse to."
             }
         ],
         "outputs": [
@@ -552,7 +576,8 @@
                     "string"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The arithmetic operation to perform."
             },
             {
                 "name": "num1",
@@ -565,7 +590,8 @@
                     "string"
                 ],
                 "defaultType": "number",
-                "defaultValue": 0
+                "defaultValue": 0,
+                "description": "First number for operation."
             },
             {
                 "name": "num2",
@@ -578,7 +604,8 @@
                     "string"
                 ],
                 "defaultType": "number",
-                "defaultValue": 0
+                "defaultValue": 0,
+                "description": "Second number for operation."
             }
         ],
         "outputs": [
@@ -612,7 +639,8 @@
                     "pulse"
                 ],
                 "defaultType": "string",
-                "defaultValue": ""
+                "defaultValue": "",
+                "description": "The constant value to log at the client."
             }
         ],
         "outputs": [

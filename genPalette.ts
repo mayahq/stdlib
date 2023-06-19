@@ -45,6 +45,8 @@ function getProcedureDefFromClass(procClass: any, dirname: string) {
             allowedTypes: input.allowedTypes,
             defaultType: defaultType,
             defaultValue: defaultValue,
+            editorProperties: input.editorProperties,
+            description: input.description,
         })
     })
 

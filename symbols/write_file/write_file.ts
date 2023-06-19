@@ -33,7 +33,7 @@ class WriteFile extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (vals, callback, _pulse) => {
+    call: Symbol['call'] = async (_, vals, callback, _pulse) => {
         const { filePath, fileContent } = vals
 
         let dataToWrite

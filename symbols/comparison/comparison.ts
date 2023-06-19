@@ -38,7 +38,7 @@ class Comparison extends Symbol {
         },
     }
 
-    call: Symbol['call'] = async (vals, callback, _pulse) => {
+    call: Symbol['call'] = async (_ctx, vals, callback, _pulse) => {
         const { val1, val2, operation } = vals
 
         if (typeof val1 === 'string' || typeof val2 === 'string') {
