@@ -29,7 +29,7 @@ class Change extends Symbol {
             category: 'stdlib',
             color: 'brown',
             icon: '',
-            paletteLabel: 'read-file',
+            paletteLabel: 'change',
         },
     }
 

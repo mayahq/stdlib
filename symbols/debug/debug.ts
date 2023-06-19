@@ -29,6 +29,7 @@ class Debug extends Symbol {
             value: vals.value,
             timestamp: Date.now(),
             sourceProcedure: this.id,
+            pulse: pulse,
         }
         this.runtime.comms.broadcast({
             event: 'debug',
