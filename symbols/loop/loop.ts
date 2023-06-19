@@ -21,12 +21,12 @@ class Loop extends Symbol {
             continue: {
                 type: PULSE,
                 description: 'This pulse port will fire if the condition is true.',
-                displayName: 'If true',
+                displayName: 'On continue',
             },
             terminate: {
                 type: PULSE,
                 description: 'This pulse port will fire if the condition is false.',
-                displayName: 'If false',
+                displayName: 'On terminate',
             },
         },
         editorProperties: {

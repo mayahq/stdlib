@@ -1,5 +1,50 @@
 [
     {
+        "type": "gh:mayahq/stdlib/change",
+        "paletteLabel": "read-file",
+        "inputs": [
+            {
+                "name": "pulse",
+                "type": "basepulse"
+            },
+            {
+                "name": "destProperty",
+                "displayName": "Destination",
+                "allowLink": true,
+                "allowedTypes": [
+                    "string"
+                ],
+                "defaultType": "string",
+                "defaultValue": "",
+                "description": "The property to change"
+            },
+            {
+                "name": "sourceProperty",
+                "displayName": "To",
+                "allowLink": true,
+                "allowedTypes": [
+                    "procedure",
+                    "pulse",
+                    "string",
+                    "number",
+                    "boolean",
+                    "json"
+                ],
+                "defaultType": "string",
+                "defaultValue": "",
+                "description": "The property to assign"
+            }
+        ],
+        "outputs": [
+            {
+                "name": "result",
+                "displayName": "Result",
+                "type": "pulse",
+                "linkType": "pulse"
+            }
+        ]
+    },
+    {
         "type": "gh:mayahq/stdlib/read_file",
         "paletteLabel": "read-file",
         "inputs": [
@@ -538,13 +583,13 @@
         "outputs": [
             {
                 "name": "continue",
-                "displayName": "If true",
+                "displayName": "On continue",
                 "type": "pulse",
                 "linkType": "pulse"
             },
             {
                 "name": "terminate",
-                "displayName": "If false",
+                "displayName": "On terminate",
                 "type": "pulse",
                 "linkType": "pulse"
             }
