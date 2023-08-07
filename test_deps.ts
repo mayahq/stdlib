@@ -5,5 +5,5 @@ export { default as axios } from 'npm:axios'
 // export { LocalStorage, Program, Runtime } from '/Users/dushyant/Maya/pac-runtime/mod.ts'
 // export type { ProgramDsl } from '/Users/dushyant/Maya/pac-runtime/mod.ts'
 
-export { LocalStorage, Program, Runtime } from 'https://deno.land/x/mayalabs_runtime@0.0.8/mod.ts'
-export type { ProgramDsl } from 'https://deno.land/x/mayalabs_runtime@0.0.8/mod.ts'
+export { LocalStorage, Program, Runtime } from 'https://deno.land/x/mayalabs_runtime@0.0.17/mod.ts'
+export type { ProgramDsl } from 'https://deno.land/x/mayalabs_runtime@0.0.17/mod.ts'
